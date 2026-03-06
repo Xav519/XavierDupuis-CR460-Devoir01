@@ -1,9 +1,10 @@
-terraform {
-  cloud {
-    organization = "XavierDupuisCR460Devoir01"
+terraform { 
+  cloud { 
+    
+    organization = "XavierDupuisCR460Devoir01" 
 
-    workspaces {
+    workspaces { 
       name = "XavierDupuis-De01" 
-    }
-  }
+    } 
+  } 
 }
