@@ -50,7 +50,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   ]
 
  # Note: En production, je dois utiliser une méthode plus sécurisée pour les mots de passe, ssh keys, ou Azure Key Vault. Ici, c'est juste pour les besoins du devoir.
-  admin_password                  = "Password"
+  admin_password                  = "Password123!"
   disable_password_authentication = false
 
   os_disk {
