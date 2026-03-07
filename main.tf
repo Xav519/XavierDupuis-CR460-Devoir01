@@ -6,7 +6,7 @@ provider "azurerm" {
 # Étape 7: Création du Groupe de Ressources
 resource "azurerm_resource_group" "rg" {
   name     = "RG-Devoir-Cloud-XavierDupuis"
-  location = "East US"
+  location = "canadacentral"
 }
 
 # Étape 8: Création du Réseau Virtuel (VNet)
@@ -43,7 +43,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                = "VM-devoir-XavierDupuis"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_F2"
+  size                = "Standard_B1s"
   admin_username      = "adminuser"
   network_interface_ids = [
     azurerm_network_interface.nic.id,
