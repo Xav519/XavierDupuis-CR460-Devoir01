@@ -25,6 +25,33 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
+# Étape 10: Création de l'Adresse IP Publique
+resource "azurerm_public_ip" "pip" {
+  name                = "pip-devoir-XavierDupuis"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method   = "Dynamic"
+}
+
+# Étape 10: Création du groupe de sécurité réseau (NSG) avec une règle pour autoriser le trafic HTTP
+resource "azurerm_network_security_group" "nsg" {
+  name                = "nsg-devoir-XavierDupuis"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  security_rule {
+    name                       = "AllowHTTP"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
 # Étape 9: 1. Créer l'interface réseau (NIC)
 resource "azurerm_network_interface" "nic" {
   name                = "nic-devoir-XavierDupuis"
@@ -35,7 +62,27 @@ resource "azurerm_network_interface" "nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pip.id # Étape 10: Associer l'IP publique à la NIC
   }
+}
+
+# Étape 10: Liaison du NSG à la carte réseau
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id      = azurerm_network_interface.nic.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
+
+# Étape 10: Script de déploiement Docker (Cloud-Init)
+locals {
+  docker_setup = <<-EOF
+              #!/bin/bash
+              sudo apt-get update
+              sudo apt-get install -y docker.io
+              sudo systemctl start docker
+              sudo systemctl enable docker
+              # Déploiement d'un container Nginx de test
+              sudo docker run -d -p 80:80 --name web-devoir nginx
+              EOF
 }
 
 # Étape 9: 2. Créer la Machine Virtuelle Linux (Ubuntu)
