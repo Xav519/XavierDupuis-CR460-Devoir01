@@ -72,7 +72,7 @@ resource "azurerm_network_interface_security_group_association" "example" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
-# Étape 10: Script de déploiement Docker (Cloud-Init)
+# Étape 10: Script de déploiement Docker
 locals {
   docker_setup = <<-EOF
               #!/bin/bash
@@ -99,6 +99,9 @@ resource "azurerm_linux_virtual_machine" "vm" {
  # Note: En production, je dois utiliser une méthode plus sécurisée pour les mots de passe, ssh keys, ou Azure Key Vault. Ici, c'est juste pour les besoins du devoir.
   admin_password                  = "Password123!"
   disable_password_authentication = false
+
+  # Envoi du script Docker à la VM
+  custom_data = base64encode(local.docker_setup)
 
   os_disk {
     caching              = "ReadWrite"
