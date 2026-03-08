@@ -40,7 +40,6 @@ L'infrastructure déployée repose sur les composants Azure suivants :
 | Image | Ubuntu Server 22.04 LTS Gen2 |
 | Taille | Standard_DC1s_v3 |
 | Région | eastus |
-| Authentification | Clé SSH |
 | OS | Linux |
 
 La taille **Standard_DC1s_v3** a été sélectionnée pour contourner
@@ -129,7 +128,7 @@ nécessaires.
 Ce projet a permis de résoudre plusieurs problèmes techniques réels
 rencontrés lors du déploiement sur Azure.
 
-## 1️Erreur SkuNotAvailable
+## Erreur SkuNotAvailable
 
 Initialement, la VM devait utiliser une instance de la série **B
 (Burstable)**.\
