@@ -1,4 +1,4 @@
-# ☁️ Infrastructure Azure Automatisée avec Terraform
+# Infrastructure Azure Automatisée avec Terraform
 
 ### Déploiement d'une Machine Virtuelle avec Docker et Nginx via Infrastructure as Code
 
@@ -16,54 +16,39 @@ Infrastructure Cloud**.
 
 ------------------------------------------------------------------------
 
-# 🏗️ Architecture de l'Infrastructure
+# Architecture de l'Infrastructure
 
 L'infrastructure déployée repose sur les composants Azure suivants :
 
 ## Composants principaux
 
-  -----------------------------------------------------------------------
-  Ressource                        Description
-  -------------------------------- --------------------------------------
-  Resource Group                   Conteneur logique regroupant toutes
-                                   les ressources Azure du projet
-
-  Virtual Network (VNet)           Réseau virtuel isolé permettant la
-                                   communication entre les ressources
-
-  Subnet                           Sous-réseau dédié pour la machine
-                                   virtuelle
-
-  Network Security Group (NSG)     Règles de sécurité réseau autorisant
-                                   le trafic HTTP (port 80)
-
-  Public IP Address                Adresse IP publique statique
-                                   permettant d'accéder au serveur
-
-  Network Interface (NIC)          Interface réseau connectant la VM au
-                                   réseau Azure
-
-  Virtual Machine                  Instance Ubuntu exécutant Docker et le
-                                   container Nginx
-  -----------------------------------------------------------------------
+| Ressource | Description |
+|-----------|-------------|
+| Resource Group | Conteneur logique regroupant toutes les ressources Azure du projet |
+| Virtual Network (VNet) | Réseau virtuel isolé permettant la communication entre les ressources |
+| Subnet | Sous-réseau dédié pour la machine virtuelle |
+| Network Security Group (NSG) | Règles de sécurité réseau autorisant le trafic HTTP (port 80) |
+| Public IP Address | Adresse IP publique statique permettant d'accéder au serveur |
+| Network Interface (NIC) | Interface réseau connectant la VM au réseau Azure |
+| Virtual Machine | Instance Ubuntu exécutant Docker et le container Nginx |
 
 ## Configuration de la Machine Virtuelle
 
-  Paramètre          Valeur
-  ------------------ ------------------------------
-  Nom                VM-devoir-XavierDupuis
-  Image              Ubuntu Server 22.04 LTS Gen2
-  Taille             Standard_DC1s_v3
-  Région             eastus
-  Authentification   Clé SSH
-  OS                 Linux
+| Paramètre | Valeur |
+|----------|--------|
+| Nom | VM-devoir-XavierDupuis |
+| Image | Ubuntu Server 22.04 LTS Gen2 |
+| Taille | Standard_DC1s_v3 |
+| Région | eastus |
+| Authentification | Clé SSH |
+| OS | Linux |
 
 La taille **Standard_DC1s_v3** a été sélectionnée pour contourner
 certaines restrictions de quota dans la région Azure utilisée.
 
 ------------------------------------------------------------------------
 
-# ⚙️ Déploiement Automatisé (Bootstrapping)
+# Déploiement Automatisé (Bootstrapping)
 
 Afin d'automatiser entièrement la configuration du serveur dès son
 démarrage, le projet utilise **Cloud-init via la propriété `custom_data`
@@ -96,7 +81,7 @@ Le container **Nginx** sert alors la page web par défaut.
 
 ------------------------------------------------------------------------
 
-# 🚀 Déploiement de l'Infrastructure
+# Déploiement de l'Infrastructure
 
 ## Prérequis
 
@@ -139,12 +124,12 @@ nécessaires.
 
 ------------------------------------------------------------------------
 
-# 🔍 Défis Techniques Rencontrés
+# Défis Techniques Rencontrés
 
 Ce projet a permis de résoudre plusieurs problèmes techniques réels
 rencontrés lors du déploiement sur Azure.
 
-## 1️⃣ Erreur SkuNotAvailable
+## 1️Erreur SkuNotAvailable
 
 Initialement, la VM devait utiliser une instance de la série **B
 (Burstable)**.\
@@ -161,7 +146,7 @@ qui était disponible dans cette région.
 
 ------------------------------------------------------------------------
 
-## 2️⃣ Compatibilité Génération 1 vs Génération 2
+## Compatibilité Génération 1 vs Génération 2
 
 Une incompatibilité matérielle a été rencontrée lors du déploiement avec
 certaines images Linux.
@@ -176,7 +161,7 @@ Cela garantit la compatibilité avec l'infrastructure Azure moderne.
 
 ------------------------------------------------------------------------
 
-## 3️⃣ Configuration de l'IP Publique
+## Configuration de l'IP Publique
 
 Une erreur est apparue lors du provisionnement de l'adresse IP publique
 avec la configuration suivante :
@@ -198,7 +183,7 @@ ressources associées.
 
 ------------------------------------------------------------------------
 
-# 🧹 Destruction de l'Infrastructure
+# Destruction de l'Infrastructure
 
 Pour supprimer complètement toutes les ressources créées dans Azure :
 
@@ -214,7 +199,7 @@ Toutes les ressources seront supprimées proprement.
 
 ------------------------------------------------------------------------
 
-# 📚 Technologies Utilisées
+# Technologies Utilisées
 
 -   Terraform
 -   Microsoft Azure
@@ -225,7 +210,7 @@ Toutes les ressources seront supprimées proprement.
 
 ------------------------------------------------------------------------
 
-# 🎯 Objectifs du Projet
+# Objectifs du Projet
 
 Ce projet démontre :
 
@@ -236,7 +221,7 @@ Ce projet démontre :
 
 ------------------------------------------------------------------------
 
-# 👨‍💻 Auteur
+# Auteur
 
 **Xavier Dupuis**
 
